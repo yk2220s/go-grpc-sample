@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package blog;
+
+service Blog {
+	rpc GetPost(GetRequest) returns (Post) {}
+	rpc SavePost(SaveRequest) returns (Post) {}
+}
+
+message GetRequest {
+	int32 id = 1;
+}
+
+message SaveRequest {
+	int32 id = 1; // if id is 0, we create new post.
+	string title = 2;
+	string text = 3;
+}
+
+message Post {
+	int32 id = 1;
+	string title = 2;
+	string tezt = 3;
+}
