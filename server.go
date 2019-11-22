@@ -7,6 +7,7 @@ import (
 
 	pb "github.com/yk2220s/go-grpc-sample/blog"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 const (
@@ -27,6 +28,7 @@ func main() {
 
 	s := grpc.NewServer()
 	pb.RegisterBlogServer(s, &blogServer{})
+	reflection.Register(s)
 
 	fmt.Println("server running on " + address)
 	s.Serve(lis)
