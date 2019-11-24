@@ -9,6 +9,7 @@ import (
 	pb "github.com/yk2220s/go-grpc-sample/blog"
 	"google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
+	"google.golang.org/grpc/reflection"
 	status "google.golang.org/grpc/status"
 )
 
@@ -30,6 +31,7 @@ func (s *blogServer) SavePost(ctx context.Context, req *pb.SaveRequest) (*pb.Pos
 
 func main() {
 	fmt.Println("building server..")
+
 	address := fmt.Sprintf("localhost:%d", port)
 	lis, err := net.Listen("tcp", address)
 	if err != nil {
@@ -38,6 +40,7 @@ func main() {
 
 	s := grpc.NewServer()
 	pb.RegisterBlogServer(s, &blogServer{})
+	reflection.Register(s)
 
 	fmt.Println("server running on " + address)
 	s.Serve(lis)
