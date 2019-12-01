@@ -24,11 +24,16 @@ type BlogServer struct {
 
 // GetPost implements interface
 func (s *BlogServer) GetPost(ctx context.Context, req *pb.GetRequest) (*pb.Post, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPost not implemented")
+	if req.GetId() == 1 {
+		return &pb.Post{Id: 1, Title: "How to train the dragon", Text: "the amazing film"}, nil
+	}
+
+	return nil, status.Errorf(codes.NotFound, "Post is not found")
 }
 
 // SavePost implements interface
 func (s *BlogServer) SavePost(ctx context.Context, req *pb.SaveRequest) (*pb.Post, error) {
+	// write your logic
 	return nil, status.Errorf(codes.Unimplemented, "method SavePost not implemented")
 }
 
