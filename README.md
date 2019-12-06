@@ -1,4 +1,4 @@
-# gRPC implementation sample by golang
+# gRPC api server implementation sample by golang
 
 ## requirement
 
